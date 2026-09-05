@@ -13,7 +13,7 @@ RUN node .yarn/releases/yarn-4.9.2.cjs build && \
 FROM registry.access.redhat.com/ubi10/nodejs-24-minimal
 WORKDIR /opt/app-root/src
 ENV NODE_ENV=production \
-    HOSTNAME=0.0.0.0 \
+    HOST=0.0.0.0 \
     PORT=4321
 USER root
 COPY --from=builder --chown=1001:0 /opt/app-root/src/dist ./dist
