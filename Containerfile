@@ -2,13 +2,11 @@
 FROM registry.access.redhat.com/ubi10/nodejs-24 AS builder
 WORKDIR /opt/app-root/src
 USER root
-RUN npm install -g corepack && corepack enable
-COPY package.json yarn.lock .yarnrc.yml ./
-COPY .yarn ./.yarn
-RUN node .yarn/releases/yarn-4.9.2.cjs install --immutable
+RUN npm install -g pnpm
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+RUN pnpm install --frozen-lockfile && pnpm store prune
 COPY . .
-RUN node .yarn/releases/yarn-4.9.2.cjs build && \
-    node .yarn/releases/yarn-4.9.2.cjs workspaces focus --all --production
+RUN pnpm build && pnpm prune --prod
 
 FROM registry.access.redhat.com/ubi10/nodejs-24-minimal
 WORKDIR /opt/app-root/src

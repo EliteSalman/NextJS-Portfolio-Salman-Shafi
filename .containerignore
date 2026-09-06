@@ -1,0 +1,34 @@
+# version control
+.git/
+.github/
+
+# package manager artifacts
+.yarn/
+yarn.lock
+.yarnrc.yml
+.pnpm-store/
+pnpm-debug.log*
+
+# local dev
+node_modules/
+.astro/
+dist/
+build/
+out/
+coverage/
+
+# env & secrets
+.env*
+
+# deployment tooling
+.wrangler/
+.vercel/
+wrangler.toml
+wrangler.deploy.toml
+
+# docs & misc
+*.md
+LICENSE
+.DS_Store
+*.pem
+*.tsbuildinfo
