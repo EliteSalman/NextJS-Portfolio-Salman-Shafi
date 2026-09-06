@@ -8,3 +8,6 @@ compatibility_flags = ["nodejs_compat"]
 [assets]
 directory = "./dist"
 binding = "ASSETS"
+
+[cache]
+enabled = true
