@@ -23,7 +23,7 @@ export default function Hero() {
           </h1>
           
           <h2 className="text-xl md:text-2xl text-[#a1a1aa] font-mono">
-            System Administrator
+            Unix/Linux Systems & Network Engineer
           </h2>
           
           <p className="text-base md:text-lg text-[#888] leading-relaxed max-w-2xl font-mono mt-2">
