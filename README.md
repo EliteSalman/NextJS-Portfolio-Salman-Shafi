@@ -2,7 +2,7 @@
 
 ![Astro Portfolio for System Admins](public/share.webp)
 
-A strict, terminal-driven portfolio website engineered for System Administrators, DevOps practitioners, and backend engineers. Built with **Astro 5**, it features a pure AMOLED `#000` interface, mechanical Framer Motion animations, and a fully functional CLI-styled contact execution sequence.
+A strict, terminal-driven portfolio website engineered for System Administrators, DevOps practitioners, and backend engineers. Built with **Astro 7**, it features a pure AMOLED `#000` interface, mechanical Framer Motion animations, and a fully functional CLI-styled contact execution sequence.
 
 ---
 
@@ -39,35 +39,25 @@ A strict, terminal-driven portfolio website engineered for System Administrators
 
 ## 🛠️ Tech Stack
 
-| Domain | Technology |
-|---|---|
-| Framework | Astro 7 (server output) |
-| Language | TypeScript |
-| Styling | Tailwind CSS |
-| Motion | Framer Motion (Variants) |
-| Email | Nodemailer |
-| Runtime | Infrastructure Agonostic |
+| Domain | Technology | Version |
+|---|---|---|
+| Framework | Astro | 7 |
+| UI Library | React | 19 |
+| Language | TypeScript | 6 |
+| Styling | Tailwind CSS | 4 |
+| Motion | Framer Motion | 13 |
+| Icons | Lucide React | 1 |
+| Email | Nodemailer | 10 |
+| Package Manager | pnpm | 12 |
+| Runtime | Infrastructure Agnostic | — |
 
 ---
 
 ## 📦 Deployment Configuration
 
-### 1️⃣ Install Podman Infrastructure
+### Environmental Variables
 
-```bash
-sudo dnf install podman podman-compose
-```
-
-### 2️⃣ Clone the Repository
-
-```bash
-git clone git@github.com:EliteSalman/Astro-Portfolio-Salman-Shafi.git
-cd Astro-Portfolio-Salman-Shafi
-```
-
-### 3️⃣ Environmental Variables
-
-Create `.env.local` in the root directory prior to building the container. All variables must be set at build time.
+Create `.env.local` in the root directory prior to building. All variables must be set at build time.
 
 ```env
 # SMTP Configuration
@@ -83,32 +73,140 @@ FROM_EMAIL=no-reply@example.tld
 TO_EMAIL=your-email@example.tld
 
 # Application Configuration
-NEXT_PUBLIC_SITE_URL=[https://example.tld](https://example.tld)
+SITE_URL=https://example.tld
 
 # Cloudflare Turnstile Configuration
 TURNSTILE_SITE_KEY=your-turnstile-site-key
 TURNSTILE_SECRET_KEY=your-turnstile-secret-key
 ```
 
-### 4️⃣ Build the Container Image
+---
+
+### 🦭 Podman / Docker
+
+#### 1️⃣ Install Podman
+
+```bash
+sudo dnf install podman podman-compose
+```
+
+#### 2️⃣ Clone the Repository
+
+```bash
+git clone git@github.com:EliteSalman/Astro-Portfolio-Salman-Shafi.git
+cd Astro-Portfolio-Salman-Shafi
+```
+
+#### 3️⃣ Install Dependencies
+
+```bash
+pnpm install
+```
+
+#### 4️⃣ Set Environmental Variables
+
+Create `.env.local` as shown above.
+
+#### 5️⃣ Build the Container Image
 
 ```bash
 podman build -t astro-portfolio .
 ```
 
-### 5️⃣ Execute Podman Compose
+#### 6️⃣ Run with Compose
 
 ```bash
 podman-compose up -d
 ```
 
-### 6️⃣ Verify Deployment
-
-The application binds to port `4321` in the Astro Node server configuration. It is highly recommended to place this behind a reverse proxy (e.g., Caddy or NGINX) for production SSL termination rather than exposing the Node server directly.
+#### 7️⃣ Verify Deployment
 
 ```bash
 curl -I http://127.0.0.1:4321
 ```
+
+The application binds to port `4321`. It is highly recommended to place this behind a reverse proxy (e.g., Caddy or NGINX) for production SSL termination rather than exposing the Node server directly.
+
+---
+
+### ☁️ Cloudflare Workers
+
+#### 1️⃣ Clone the Repository
+
+```bash
+git clone git@github.com:EliteSalman/Astro-Portfolio-Salman-Shafi.git
+cd Astro-Portfolio-Salman-Shafi
+```
+
+#### 2️⃣ Install Dependencies
+
+```bash
+pnpm install
+```
+
+#### 3️⃣ Set Environmental Variables
+
+Create `.env.local` as shown above. For Cloudflare Workers, secrets should also be set via the Wrangler CLI:
+
+```bash
+wrangler secret put SMTP_HOST
+wrangler secret put SMTP_USERNAME
+wrangler secret put SMTP_PASSWORD
+wrangler secret put TURNSTILE_SECRET_KEY
+```
+
+#### 4️⃣ Build & Deploy
+
+```bash
+pnpm deploy:cloudflare
+```
+
+#### 5️⃣ Verify Deployment
+
+```bash
+curl -I https://your-worker.your-subdomain.workers.dev
+```
+
+---
+
+### 🖥️ Node.js (Bare Metal / VPS)
+
+#### 1️⃣ Clone the Repository
+
+```bash
+git clone git@github.com:EliteSalman/Astro-Portfolio-Salman-Shafi.git
+cd Astro-Portfolio-Salman-Shafi
+```
+
+#### 2️⃣ Install Dependencies
+
+```bash
+pnpm install
+```
+
+#### 3️⃣ Set Environmental Variables
+
+Create `.env.local` as shown above.
+
+#### 4️⃣ Build
+
+```bash
+pnpm build
+```
+
+#### 5️⃣ Start the Server
+
+```bash
+node dist/server/entry.mjs
+```
+
+#### 6️⃣ Verify Deployment
+
+```bash
+curl -I http://127.0.0.1:4321
+```
+
+It is highly recommended to place this behind a reverse proxy (e.g., Caddy or NGINX) for production SSL termination.
 
 ---
 
@@ -119,22 +217,28 @@ curl -I http://127.0.0.1:4321
 ├── src/
 │   ├── pages/
 │   │   ├── api/
-│   │   │   ├── contact/
-│   │   │   └── turnstile/
-│   │   ├── layouts/Layout.astro
-│   │   ├── styles/global.css
+│   │   │   ├── contact.ts
+│   │   │   └── turnstile.ts
 │   │   ├── index.astro
-│   │   ├── sitemap.xml.ts
-│   │   └── ...
-│   └── components/
-│       ├── home/
-│       │   ├── Hero.tsx
-│       │   ├── About.tsx
-│       │   ├── Skills.tsx
-│       │   ├── Experience.tsx
-│       │   └── Contact.tsx
-│       ├── Header.tsx
-│       └── Footer.tsx
+│   │   └── sitemap.xml.ts
+│   ├── layouts/
+│   │   └── Layout.astro
+│   ├── components/
+│   │   ├── home/
+│   │   │   ├── Hero.tsx
+│   │   │   ├── About.tsx
+│   │   │   ├── Skills.tsx
+│   │   │   ├── Experience.tsx
+│   │   │   └── Contact.tsx
+│   │   ├── Header.tsx
+│   │   ├── Home.tsx
+│   │   └── Footer.tsx
+│   ├── styles/
+│   │   └── global.css
+│   ├── lib/
+│   │   └── validation.ts
+│   └── types/
+│       └── turnstile.d.ts
 └── public/
     ├── photo.webp
     ├── share.webp
