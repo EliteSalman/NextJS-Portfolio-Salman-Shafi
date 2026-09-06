@@ -48,7 +48,7 @@ export default function About() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-12 gap-2 mt-1">
               <div className="col-span-3 text-[#555]">role</div>
-              <div className="col-span-9 text-[#e5e5e5]">= "System Administrator"</div>
+              <div className="col-span-9 text-[#e5e5e5]">= "Unix/Linux Systems & Network Engineer"</div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-12 gap-2 mt-1">
               <div className="col-span-3 text-[#555]">location</div>
