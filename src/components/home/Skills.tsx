@@ -2,18 +2,18 @@
 
 export default function Skills() {
   const skillUnits = [
-    { id: "os-core", name: "Operating Systems", items: "RHEL/AlmaLinux, Debian, Ubuntu, Alpine, FreeBSD" },
+    { id: "os-core", name: "Operating Systems", items: "Fedora/RHEL/AlmaLinux, Debian, Ubuntu, Alpine, FreeBSD" },
     { id: "container-virt", name: "Virtualisation", items: "KVM, QEMU, Hyper-V, Podman (Quadlets & Compose), Docker" },
     { id: "dns-dnssec", name: "DNS & DNSSEC", items: "BIND, Knot, PowerDNS, Technitium, dnsmasq, Unbound, Multi-signer (RFC 8901)" },
-    { id: "web-proxy", name: "Web Servers", items: "Caddy (Custom RPM), NGINX, Apache, LiteSpeed, Traefik" },
-    { id: "mail-stack", name: "Mail Stack", items: "Stalwart, Postfix, Dovecot, Mailcow, Mail-in-a-Box, Google Workspace, M365" },
-    { id: "network-mesh", name: "Networking", items: "IPv4/IPv6, BGP, VLAN, CGNAT, WireGuard, Tailscale, Headscale, ZeroTier" },
-    { id: "firewall-router", name: "Firewalls & Routers", items: "firewalld, UFW, pf, OpenWrt, ImmortalWrt, MikroTik" },
+    { id: "web-proxy", name: "Web Servers", items: "Caddy, NGINX, Apache, LiteSpeed, Traefik" },
+    { id: "mail-stack", name: "Mail Stack", items: "Stalwart, Postfix, Dovecot, Mailcow, Mail-in-a-Box, Google Workspace, M365, Zoho" },
+    { id: "network-mesh", name: "Networking", items: "IPv4/IPv6, Routng, BGP, VLAN, CGNAT, WireGuard, Wi-Fi, Tailscale, ZeroTier, Cloudflare Networking (Zero Trust)" },
+    { id: "firewall-router", name: "Firewalls & Routers", items: "firewalld, UFW, pf, OpenWrt, KeeneticOS, RouterOS (MikroTik)" },
     { id: "storage-sec", name: "Storage & Security", items: "ZFS, Btrfs, XFS, LVM, LUKS, SELinux, ACME/certbot" },
-    { id: "monitor-db", name: "Monitoring & DBs", items: "Grafana, Prometheus, Uptime Kuma, MariaDB, PostgreSQL, systemd, auditd" },
-    { id: "cloud-cdn", name: "Cloud & CDN", items: "Cloudflare (WAF, Tunnels), AWS, Hetzner, Vultr, Fastly, CloudFront, G-Core" },
-    { id: "self-hosted", name: "Self-Hosted Apps", items: "Nextcloud, Vaultwarden, Immich, AdGuard Home, Ghost CMS, MikoPBX" },
-    { id: "deploy-pkg", name: "Deployment & Panels", items: "RPM/DEB Packaging, COPR, aaPanel, HestiaCP, cPanel" }
+    { id: "monitor-db", name: "Monitoring & DBs", items: "Grafana, Prometheus, Uptime Kuma, MariaDB, PostgreSQL, Redis, systemd, auditd" },
+    { id: "cloud-cdn", name: "Cloud & CDN", items: "Cloudflare (WAF, Tunnels), AWS, Hetzner, Fastly, CloudFront, G-Core, DigitalOcean, MetroVPS" },
+    { id: "self-hosted", name: "Self-Hosted Apps", items: "Nextcloud, Vaultwarden, Immich, AdGuard Home, Ghost CMS, PBX" },
+    { id: "deploy-pkg", name: "Deployment & Panels", items: "Git, RPM/DEB Packaging, COPR, aaPanel, HestiaCP, cPanel, Webuzo" }
   ];
 
   return (
